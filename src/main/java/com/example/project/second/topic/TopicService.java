@@ -22,7 +22,7 @@ public class TopicService {
         return topics;
     }
     public Topic getTopic(String id) {
-        return topics.stream().filter(topic -> topic.getId().equals(id)).findFirst().get();
+        return topicRepository.findById(id).get();
     }
 
     public void createTopic(Topic topic) {
@@ -31,14 +31,8 @@ public class TopicService {
     }
 
     public void updateTopic(Topic topic, String id) {
-        for (int i = 0; i < topics.size(); i++) {
-            Topic t = topics.get(i);
-            if(t.getId().equals(id)) {
-                topics.set(i, topic);
-                return;
-            }
-        }
+        topicRepository.save(topic);
     }
     public void deleteTopic(String id) {
-        topics.removeIf(topic -> topic.getId().equals(id));}
+        topicRepository.deleteById(id);}
 }
