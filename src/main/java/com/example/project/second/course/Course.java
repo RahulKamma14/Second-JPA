@@ -1,21 +1,28 @@
 package com.example.project.second.course;
 
+import com.example.project.second.topic.Topic;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
 @Entity
 public class Course {
     @Id
     private String id;
     private String name;
     private String description;
+    @SuppressWarnings("JpaAttributeTypeInspection")
+    @ManyToOne
+    private Topic topic;
 
     public Course() {
         // no-arg constructor
     }
-    public Course(String id, String name, String description) {
+    public Course(String id, String name, String description, String topicId) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.topic = new Topic(topicId, "", "");
     }
 
     public String getId() {
@@ -40,5 +47,8 @@ public class Course {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setTopic(Topic topic) {
     }
 }
